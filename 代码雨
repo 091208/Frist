@@ -1,0 +1,29 @@
+import pygame
+import random
+# 初始化
+pygame.init()
+font = pygame.font.SysFont('宋体', 25)
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+screenwidth = screen.get_width()
+screenheight = screen.get_height()
+surface = pygame.Surface((screenwidth, screenheight), pygame.SRCALPHA)
+pygame.Surface.convert(surface)
+surface.fill((0, 0, 0, 10))
+screen.fill((0, 0, 0, 10))
+# 内容
+str = [chr(i) for i in range(48, 58)] + [chr(i) for i in range(97, 123)]
+texts = [font.render(i, True, (0, 255, 0)) for i in str]
+lst = list(range(99))
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            exit()
+    pygame.time.delay(50)
+    screen.blit(surface, (0, 0))
+    for i in range(len(lst)):
+        text = random.choice(texts)
+        screen.blit(text, (i * 20, lst[i] * 20))
+        lst[i] += 1
+        if random.random() < 0.05:
+            lst[i] = 0
+    pygame.display.flip()
