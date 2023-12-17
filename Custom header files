@@ -1,0 +1,55 @@
+#ifndef MY_HEADER_H
+#define MY_HEADER_H
+
+#include <bits/stdc++.h>
+
+double mean(const double x1[], int y1) {
+    double sum = 0;
+    for (int i = 0; i < y1; i++) {
+        sum += x1[i];
+    }
+    return sum / y1;
+}
+double median(double x2[], int y2) {
+    std::sort(x2, x2 + y2);
+    if (y2 % 2 == 0) {
+        return (x2[y2 / 2 - 1] + x2[y2 / 2]) / 2.0;
+    }
+    else {
+        return x2[y2 / 2];
+    }
+}
+double mode(double x3[], int y3) {
+    std::sort(x3,x3 + y3);
+    double ans = 1, num = 0, most;
+    for(int i = 1; i < y3; i++){
+        if(x3[i] == x3[i - 1]){
+            ans++;
+            if(ans > num) {
+                num = ans;
+                most = x3[i];
+            }
+        }else{
+            ans = 1;
+        }
+    }
+    if(num == 0){
+        return 0;
+    }
+    return most;
+}
+double variance(double x4[], int y4) {
+    double sum = 0.0, mean, var = 0.0;
+    for (int i = 0; i < y4; i++) {
+        sum += x4[i];
+    }
+    mean = sum / y4;
+    for(int i = 0; i < y4; i++) {
+        var += pow(x4[i] - mean, 2);
+    }
+    return var / y4;
+}
+double standard_deviation(double x5[],int y5){
+    return sqrt(variance(x5,y5));
+}
+#endif
